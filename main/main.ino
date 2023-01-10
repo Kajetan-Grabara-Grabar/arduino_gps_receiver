@@ -6,6 +6,7 @@
 #define blue_button 3
 #include <LiquidCrystal_I2C.h>
 #include <SoftwareSerial.h>
+#include <TinyGPS++.h>
 
 LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
@@ -35,9 +36,14 @@ void loop()
     while (ss.available() > 0){
         // get the byte data from the GPS
         byte gpsData = ss.read();
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print(gpsData);
-        delay(second_int_value);
+        gps.encode(ss.read());
+        if (gps.location.isUpdated()){
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print(gps.location.lat(), 6);
+            lcd.setCursor(0,1);
+            lcd.print(gps.location.lng(), 6);
+            delay(second_int_value);
+        }
     }
 }
