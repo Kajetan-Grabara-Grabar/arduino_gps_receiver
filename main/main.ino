@@ -16,6 +16,7 @@ const char build_branch[16]="<<<<build_branch>>>>"; //git branch variable for CI
 long set_time_in_seconds;
 bool end_of_a_game = false;
 SoftwareSerial ss(4, 3);
+TinyGPSPlus gps;
 void start_screen(){
     lcd.init();                      // initialize the lcd 
     lcd.backlight();    // backlight on
