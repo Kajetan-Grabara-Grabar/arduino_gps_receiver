@@ -35,7 +35,7 @@ void loop()
     while (ss.available() > 0){
         // get the byte data from the GPS
         byte gpsData = ss.read();
-        lcd.clean();
+        lcd.clear();
         lcd.setCursor(0,0);
         lcd.print(gpsData);
         delay(second_int_value);
