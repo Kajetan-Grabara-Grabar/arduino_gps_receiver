@@ -37,14 +37,17 @@ void loop()
     while (ss.available() > 0){
         // get the byte data from the GPS
         byte gpsData = ss.read();
+        lcd.clear();
+        cd.setCursor(0,0);
+        lcd.print(gpsData);
         gps.encode(ss.read());
         if (gps.location.isUpdated()){
             lcd.clear();
-            lcd.setCursor(0,0);
-            lcd.print(gps.location.lat(), 6);
+            // lcd.setCursor(0,0);
+            // lcd.print(gps.location.lat(), 6);
             lcd.setCursor(0,1);
             lcd.print(gps.location.lng(), 6);
-            delay(second_int_value);
         }
+            delay(second_int_value);
     }
 }
