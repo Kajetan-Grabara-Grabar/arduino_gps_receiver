@@ -10,8 +10,8 @@
 
 // LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
-// const char build_number[16]="Build nr <<<<build_id>>>>";    //build number variable for CI pipeline
-// const char build_branch[16]="<<<<build_branch>>>>"; //git branch variable for CI pipeline
+// const char build_number[16]="Build nr <<<s<build_id>>>>";    //build number variable for CI pipeline
+// const char build_branch[16]="<<s<<build_branch>>>>"; //git branch variable for CI pipeline
 
 // long set_time_in_seconds;
 // bool end_of_a_game = false;
@@ -56,6 +56,10 @@
  * Complete Project Details https://randomnerdtutorials.com
  */
  
+#define second_int_value 1000
+#define red_button 2
+#define blue_button 3
+#include <LiquidCrystal_I2C.h>
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
 
@@ -68,9 +72,24 @@ TinyGPSPlus gps;
 // The serial connection to the GPS device
 SoftwareSerial ss(RXPin, TXPin);
 
+LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+
+const char build_number[16]="Build nr <<<<build_id>>>>";    //build number variable for CI pipeline
+const char build_branch[16]="<<<<build_branch>>>>"; //git branch variable for CI pipeline
+
+void start_screen(){
+    lcd.init();                      // initialize the lcd 
+    lcd.backlight();    // backlight on
+    lcd.setCursor(0,0);
+    lcd.print(build_number);
+    lcd.setCursor(0,1);
+    lcd.print(build_branch);
+    delay(second_int_value);
+}
 void setup(){
   Serial.begin(9600);
   ss.begin(GPSBaud);
+  start_screen();
 }
 
 void loop(){
@@ -78,10 +97,18 @@ void loop(){
   while (ss.available() > 0){
     gps.encode(ss.read());
     if (gps.location.isUpdated()){
-      Serial.print("Latitude= "); 
-      Serial.print(gps.location.lat(), 6);
-      Serial.print(" Longitude= "); 
-      Serial.println(gps.location.lng(), 6);
+        lcd.clear;
+        Serial.print("Latitude= "); 
+        Serial.print(gps.location.lat(), 6);
+        Serial.print(" Longitude= "); 
+        Serial.println(gps.location.lng(), 6);
+        lcd.setCursor(0,0);
+        char firstline[8] = gps.location.lat();
+        lcd.print(firstline);
+        lcd.setCursor(0,1);
+        char secondine[8] = gps.location.lat();
+        lcd.print(secondine);
+        delay(second_int_value);
     }
   }
 }
