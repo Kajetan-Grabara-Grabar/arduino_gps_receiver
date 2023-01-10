@@ -97,7 +97,7 @@ void loop(){
   while (ss.available() > 0){
     gps.encode(ss.read());
     if (gps.location.isUpdated()){
-        lcd.clear;
+        lcd.clear();
         Serial.print("Latitude= "); 
         Serial.print(gps.location.lat(), 6);
         Serial.print(" Longitude= "); 
