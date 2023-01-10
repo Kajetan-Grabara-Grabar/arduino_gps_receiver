@@ -104,10 +104,10 @@ void loop(){
         Serial.println(gps.location.lng(), 6);
         lcd.setCursor(0,0);
         double firstline = gps.location.lat();
-        lcd.print(firstline);
+        lcd.print(gps.location.lat());
         lcd.setCursor(0,1);
-        double secondine = gps.location.lat();
-        lcd.print(secondine);
+        double secondine = gps.location.lng();
+        lcd.print(gps.location.lng());
         delay(second_int_value);
     }
   }
