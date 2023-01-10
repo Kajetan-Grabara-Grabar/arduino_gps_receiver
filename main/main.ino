@@ -103,10 +103,10 @@ void loop(){
         Serial.print(" Longitude= "); 
         Serial.println(gps.location.lng(), 6);
         lcd.setCursor(0,0);
-        char firstline[8] = {gps.location.lat()};
+        String firstline = gps.location.lat();
         lcd.print(firstline);
         lcd.setCursor(0,1);
-        char secondine[8] = {gps.location.lat()};
+        String secondine = gps.location.lat();
         lcd.print(secondine);
         delay(second_int_value);
     }
