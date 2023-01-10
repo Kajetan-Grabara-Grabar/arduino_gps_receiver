@@ -38,7 +38,7 @@ void loop()
         // get the byte data from the GPS
         byte gpsData = ss.read();
         lcd.clear();
-        cd.setCursor(0,0);
+        lcd.setCursor(0,0);
         lcd.print(gpsData);
         gps.encode(ss.read());
         if (gps.location.isUpdated()){
