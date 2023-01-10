@@ -97,18 +97,18 @@ void loop(){
   while (ss.available() > 0){
     gps.encode(ss.read());
     if (gps.location.isUpdated()){
-        lcd.clear();
         Serial.print("Latitude= "); 
         Serial.print(gps.location.lat(), 6);
         Serial.print(" Longitude= "); 
         Serial.println(gps.location.lng(), 6);
         lcd.setCursor(0,0);
         double firstline = gps.location.lat();
+        lcd.clear();
         lcd.print(gps.location.lat(),6);
         lcd.setCursor(0,1);
         double secondine = gps.location.lng();
         lcd.print(gps.location.lng(),6);
-        delay(second_int_value);
+        delay(10000);
     }
   }
 }
