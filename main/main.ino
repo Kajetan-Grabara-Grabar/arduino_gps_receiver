@@ -36,10 +36,10 @@ void loop()
 {
     while (ss.available() > 0){
         // get the byte data from the GPS
-        char gpsData[16] = ss.read();
+        // char gpsData[16] = ss.read();
         lcd.clear();
         lcd.setCursor(0,0);
-        lcd.print(gpsData);
+        lcd.print(gps.location.lng(), 6);
         gps.encode(ss.read());
         if (gps.location.isUpdated()){
             lcd.clear();
