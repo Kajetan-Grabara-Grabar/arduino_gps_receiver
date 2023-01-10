@@ -12,7 +12,6 @@ LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars
 const char build_number[16]="Build nr <<<<build_id>>>>";    //build number variable for CI pipeline
 const char build_branch[16]="<<<<build_branch>>>>"; //git branch variable for CI pipeline
 
-time_t past_time = now();
 long set_time_in_seconds;
 bool end_of_a_game = false;
 SoftwareSerial ss(4, 3);
