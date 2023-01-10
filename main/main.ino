@@ -39,8 +39,8 @@ void loop()
         // char gpsData[16] = ss.read();
         lcd.clear();
         lcd.setCursor(0,0);
-        lcd.print(gps.location.lng(), 6);
         gps.encode(ss.read());
+        lcd.print(gps.location.lng(), 6);
         if (gps.location.isUpdated()){
             lcd.clear();
             // lcd.setCursor(0,0);
