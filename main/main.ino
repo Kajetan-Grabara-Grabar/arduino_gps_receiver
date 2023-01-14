@@ -22,7 +22,7 @@ struct gps_degrees{
   int min;
   int double_seconds;
 };
-void start_screen(){
+gps_degrees start_screen(){
     lcd.init();                      // initialize the lcd 
     lcd.backlight();    // backlight on
     lcd.setCursor(0,0);
@@ -54,7 +54,7 @@ void loop(){
     gps.encode(ss.read());
     if (gps.location.isUpdated()){
         lcd.setCursor(0,0);
-        result = decimalToDMS(gps.location.lat());
+        gps_degrees result = decimalToDMS(gps.location.lat());
         lcd.clear();
         lcd.print(result.deg);
         lcd.print(' ');
