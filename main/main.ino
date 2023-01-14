@@ -100,7 +100,7 @@ void loop(){
         Serial.print("Latitude= "); 
         Serial.print(gps.location.lat(), 6);
         Serial.print(" Longitude= "); 
-        Serial.println(gps.location.rawLat().deg;
+        Serial.println(gps.location.rawLat().deg);
         lcd.setCursor(0,0);
         double firstline = gps.location.lat();
         lcd.clear();
