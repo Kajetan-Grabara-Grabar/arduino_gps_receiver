@@ -17,11 +17,7 @@ LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars
 const char build_number[16]="Build nr <<<<build_id>>>>";    //build number variable for CI pipeline
 const char build_branch[16]="<<<<build_branch>>>>"; //git branch variable for CI pipeline
 
-struct gps_degrees{
-  int deg;
-  int min;
-  int double_seconds;
-};
+
 void start_screen(){
     lcd.init();                      // initialize the lcd 
     lcd.backlight();    // backlight on
@@ -31,16 +27,17 @@ void start_screen(){
     lcd.print(build_branch);
     delay(second_int_value);
 }
-gps_degrees decimalToDMS(double decimalDegrees) {
+void decimalToDMS(double decimalDegrees) {
     gps_degrees result;
     int degrees = (int)decimalDegrees;
     double minutesAndSeconds = (decimalDegrees - degrees) * 60;
     int minutes = (int)minutesAndSeconds;
     double seconds = (minutesAndSeconds - minutes) * 60;
-    result.deg = degrees;
-    result.min = minutes;
-    result.double_seconds = seconds; 
-    return result;
+    lcd.print(degrees);
+    lcd.print(' ');
+    lcd.print(minutes);
+    lcd.print(' ');
+    lcd.print(seconds,4);
 }
 void setup(){
   Serial.begin(9600);
@@ -54,20 +51,10 @@ void loop(){
     gps.encode(ss.read());
     if (gps.location.isUpdated()){
         lcd.setCursor(0,0);
-        gps_degrees result = decimalToDMS(gps.location.lat());
+        decimalToDMS(gps.location.lat());
         lcd.clear();
-        lcd.print(result.deg);
-        lcd.print(' ');
-        lcd.print(result.min);
-        lcd.print(' ');
-        lcd.print(result.double_seconds,4);
         lcd.setCursor(0,1);
-        result = decimalToDMS(gps.location.lng());
-        lcd.print(result.deg);
-        lcd.print(' ');
-        lcd.print(result.min);
-        lcd.print(' ');
-        lcd.print(result.double_seconds,4);
+        decimalToDMS(gps.location.lng());
         delay(10000);
     }
   }
