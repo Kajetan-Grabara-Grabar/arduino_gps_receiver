@@ -28,7 +28,6 @@ void start_screen(){
     delay(second_int_value);
 }
 void decimalToDMS(double decimalDegrees) {
-    gps_degrees result;
     int degrees = (int)decimalDegrees;
     double minutesAndSeconds = (decimalDegrees - degrees) * 60;
     int minutes = (int)minutesAndSeconds;
