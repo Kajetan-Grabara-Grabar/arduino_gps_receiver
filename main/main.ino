@@ -33,10 +33,11 @@ void decimalToDMS(double decimalDegrees) {
     int minutes = (int)minutesAndSeconds;
     double seconds = (minutesAndSeconds - minutes) * 60;
     lcd.print(degrees);
-    lcd.print(' ');
+    lcd.print('°');
     lcd.print(minutes);
-    lcd.print(' ');
+    lcd.print("'");
     lcd.print(seconds,4);
+    lcd.print("''");
 }
 void setup(){
   Serial.begin(9600);
@@ -49,9 +50,9 @@ void loop(){
   while (ss.available() > 0){
     gps.encode(ss.read());
     if (gps.location.isUpdated()){
+        lcd.clear();
         lcd.setCursor(0,0);
         decimalToDMS(gps.location.lat());
-        lcd.clear();
         lcd.setCursor(0,1);
         decimalToDMS(gps.location.lng());
         delay(10000);
