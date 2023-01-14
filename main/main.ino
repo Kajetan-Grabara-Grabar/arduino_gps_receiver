@@ -22,7 +22,7 @@ struct gps_degrees{
   int min;
   int double_seconds;
 };
-gps_degrees start_screen(){
+void start_screen(){
     lcd.init();                      // initialize the lcd 
     lcd.backlight();    // backlight on
     lcd.setCursor(0,0);
@@ -31,7 +31,7 @@ gps_degrees start_screen(){
     lcd.print(build_branch);
     delay(second_int_value);
 }
-void decimalToDMS(double decimalDegrees) {
+gps_degrees decimalToDMS(double decimalDegrees) {
     gps_degrees result;
     int degrees = (int)decimalDegrees;
     double minutesAndSeconds = (decimalDegrees - degrees) * 60;
