@@ -33,7 +33,7 @@ void decimalToDMS(double decimalDegrees) {
     int minutes = (int)minutesAndSeconds;
     double seconds = (minutesAndSeconds - minutes) * 60;
     lcd.print(degrees);
-    lcd.print('°');
+    lcd.print(' ');
     lcd.print(minutes);
     lcd.print("'");
     lcd.print(seconds,4);
