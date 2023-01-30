@@ -1,22 +1,19 @@
 stages:
     - arduino-cli
+    - arduino-upload
 compiling:
     stage: arduino-cli
     tags:
         - raspberry
     before_script:
         - export PATH=$PATH:/home/pi/bin
-      
     script:
-       # - arduino-cli config init
-       # - arduino-cli config set library.enable_unsafe_install true
-       # - arduino-cli lib install --git-url https://github.com/johnrickman/LiquidCrystal_I2C.git
-        - sed -i "s/<<<<build_id>>>>/$CI_PIPELINE_ID/g" ./main/main.ino
+        - sed -i "s/<<<<build_id>>>>/$CI_PIPELINE_IID/g" ./main/main.ino
         - sed -i "s/<<<<build_branch>>>>/$CI_COMMIT_REF_NAME/g" ./main/main.ino
         - cat ./main/main.ino
         - arduino-cli compile -b arduino:avr:uno main
 upload:
-    stage: arduino-cli
+    stage: arduino-upload
     tags:
         - raspberry
     before_script:
