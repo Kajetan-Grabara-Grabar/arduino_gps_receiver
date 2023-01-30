@@ -25,5 +25,6 @@ github:
     tags:
         - raspberry
     script:
-        - git push github_https main
+        - git remote -v
+        - git push github main
         
