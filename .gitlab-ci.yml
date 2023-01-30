@@ -10,7 +10,6 @@ compiling:
     script:
         - sed -i "s/<<<<build_id>>>>/$CI_PIPELINE_IID/g" ./main/main.ino
         - sed -i "s/<<<<build_branch>>>>/$CI_COMMIT_REF_NAME/g" ./main/main.ino
-        - cat ./main/main.ino
         - arduino-cli compile -b arduino:avr:uno main
 upload:
     stage: arduino-upload
