@@ -1,6 +1,7 @@
 stages:
     - arduino-cli
     - arduino-upload
+    - upload-to-github
 compiling:
     stage: arduino-cli
     tags:
@@ -19,4 +20,11 @@ upload:
         - export PATH=$PATH:/home/pi/bin
     script: 
         - arduino-cli upload -p /dev/ttyUSB0 -b arduino:avr:uno main
+github:
+    stage: upload-to-github
+    tags:
+        - raspberry
+    script:
+        - git remote add github git@github.com:Kajetan-Grabara-Grabar/arduino_gps_receiver.git
+        - git push github gitlab
         
