@@ -25,6 +25,7 @@ github:
     tags:
         - raspberry
     script:
-        - git remote add github_https https://github.com/Kajetan-Grabara-Grabar/arduino_gps_receiver.git
+        - git add .
+        - git commit -am "Test push"
         - git push github_https main
         
