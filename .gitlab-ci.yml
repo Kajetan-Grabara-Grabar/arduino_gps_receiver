@@ -25,7 +25,5 @@ github:
     tags:
         - raspberry
     script:
-        - git add .
-        - git commit -am "Test push"
         - git push github_https main
         
